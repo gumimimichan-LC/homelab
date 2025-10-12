@@ -26,6 +26,10 @@ Host and manage personal media (movies, TV shows, music, books) on my home netwo
 - The reason I didn't put any other things in docker is because I experienced instability and GPU Passthrough causes glitches in my system. I also had a HV issue at this time which affected AMD's PPM.
 ---
 
+## More In-depth Setup
+
+I need to look back and redo it to make this decent so ill fix this later
+
 ## Networking & Access
 - LAN IP: I am not giving you my ips even private 
 - Ports used:
