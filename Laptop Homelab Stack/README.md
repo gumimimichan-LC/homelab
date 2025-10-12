@@ -11,3 +11,8 @@ Like everything else, it is all free, self hosted, and focused on **network mana
 
 ## Services
 These are the services I plan to run:
+
+- [Pi-hole](./Pi-hole/README.md) — DNS filtering and ad-blocking for my home network.  
+- [Unbound](./unbound/README.md) — Recursive DNS resolver to improve privacy and DNS speed.  
+- [Kuma](./Kuma/README.md) — API gateway and service mesh experimentation.  
+- [Netdata](./Netdata/README.md) — Real-time system and network monitoring.
