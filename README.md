@@ -7,7 +7,7 @@ The focus is on **learning, monitoring, and documenting real-world setups**.
 ---
 
 ## Current Projects
-- [Plex Media Server](./plex/README.md)
+- [Plex Media Server](./plex-server/README.md)
 - Raspberry Pi building/testing
 - laptop-homelab-stack
 - [Planned]Router DMZ + network isolation
