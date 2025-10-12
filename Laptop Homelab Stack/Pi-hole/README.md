@@ -3,16 +3,16 @@
 
 **Purpose**  
 Filter DNS requests and enable network-wide ad-blocking for my home network.  
-*(Main goal: block ads and trackers while learning Pi-hole setup and DNS management.)*
+*(Main goal: block ads, trackers, and malicious sites while learning Pi-hole setup and DNS management.)*
 
 ---
 
 ## Hardware & Environment
 - **Device:** 2014 HP Stream Laptop  
-- **Storage:** 256 GB microSD  
-- **Power:** Laptop running on charger, battery removed  
+- **Storage:** 256 GB microSD + 32GB storage in laptop 
+- **Power:** Laptop running on charger, I removed the battery removed  
 - **Networking:** Ethernet preferred (static IP assigned)  
-- **Installation Type:** Native Ubuntu (not Dockerized)  
+- **Installation Type:** Bare Metal Ubuntu (not run in docker)  
 
 ---
 
@@ -40,7 +40,7 @@ Filter DNS requests and enable network-wide ad-blocking for my home network.
        ```bash
        sudo systemctl restart systemd-logind
        ```
-
+     - There will possibly be 2 other "handlelid" options which you can also make ignore.
 ---
 
 ## Pi-hole Installation & Configuration
@@ -49,7 +49,7 @@ Filter DNS requests and enable network-wide ad-blocking for my home network.
   curl -sSL https://install.pi-hole.net | bash
 - **Blocklists used:** StevenBlack’s Unified Hosts  
 - **Upstream DNS:** Quad9 (filtered, DNSSEC, ECS)  
-- **Privacy Level:** Level 2 (hide domains & clients)  
+- **Privacy Level:** Level 0 (wanted to monitor usage for a bit)  
 - **Query Logging:** Disabled  
 
 ---
@@ -57,22 +57,22 @@ Filter DNS requests and enable network-wide ad-blocking for my home network.
 ## Networking & Ports
 
 - **Web Interface Port:** 80  
-- **Static IP:** Required for reliable DNS resolution  
-- **Exposure:** Local network only (do not expose to WAN)  
+- **Static IP:** Required for reliable DNS resolution (if not static, dns will break every so often)
+- **Exposure:** Local network only (do NOT expose to WAN)  
 
 ---
 
 ## Security & Hardening
 
 - Optional: enable Anonymous Mode to further reduce logging  
-- Avoid exposing Pi-hole to the internet  
+- Avoid exposing Pi-hole to the internet (this should be obvious)
 
 ---
 
 ## Monitoring & Logging
 
 - Pi-hole web UI provides effective, real-time query stats  
-- does show your computer stats (like task manager)
+- does show your computer stats (like a mini task manager performance page)
 
 ---
 
