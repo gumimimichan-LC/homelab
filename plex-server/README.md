@@ -23,7 +23,7 @@ Host and manage personal media (movies, TV shows, music, books) on my home netwo
 5. Add libraries in Plex pointing to your media folders.  
 6. Configure backups and monitoring (Windows task scheduler or external scripts) to ensure stability.
 
-The reason I didn't put any other things in docker is because I experienced instablitiy and GPU Passthrough causes glitches in my system. I also had a HV issue at this time which affected AMD's PPM.
+- The reason I didn't put any other things in docker is because I experienced instability and GPU Passthrough causes glitches in my system. I also had a HV issue at this time which affected AMD's PPM.
 ---
 
 ## Networking & Access
