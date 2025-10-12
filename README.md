@@ -45,9 +45,8 @@ The focus is on **learning, monitoring, and documenting real-world setups**.
         - Raspberry Pi (wired - T-Pot honeypot)
 
 - **Notes:**
-To be honest, I have no clue what I'm doing. I am just writing and saying what I've done in the confines of these 4 walls. 
-Also I am adding a bit of personality to stuff because while I want to show it off later, *currently* it's not for a company, it is to document my findings, projects, and other things.
-It serious but not that serious right now. Some personality will show how I truly felt in the moment rather than stating "This inquisitively frustrated me!" no it did not. 
-It made me want to do dispicable acts to the hardware in my room. 
-Sometimes tech is a chore, sometimes its not. Same goes for learning.
+  - To be honest, I have no clue what I'm doing. I am just writing and saying what I've done in the confines of these 4 walls. 
+  - Also I am adding a bit of personality to stuff because while I want to show it off later, *currently* it's not for a company, it is to document my findings, projects, and other things.
+  - It serious but not that serious right now. Some personality will show how I truly felt in the moment rather than stating "This inquisitively frustrated me!" no it did not. It made me want to do dispicable acts to the hardware in my room. 
+  - Sometimes tech is a chore, sometimes its not. Same goes for learning.
 
