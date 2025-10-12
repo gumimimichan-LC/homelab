@@ -14,7 +14,7 @@ These are the services I plan to run:
 
 - [Pi-hole](./Pi-hole/README.md) — DNS filtering and ad-blocking for my home network.  
 - [Unbound](./unbound/README.md) — Recursive DNS resolver to improve privacy and DNS speed.  
-- [Uptime Kuma](./Kuma/README.md) — 
+- [Uptime Kuma](./Kuma/README.md) — Monitoring tool that pings services to ensure uptime.
 - [Netdata](./Netdata/README.md) — Real-time system and network monitoring.
 
 ---
@@ -23,3 +23,4 @@ These are the services I plan to run:
 - All services run on the bare metal OS (Ubuntu) since 2/4 interact directly with networking.  
 - Main use is learning so services that affect the network will be deployed on my network, my room. Not the whole network. (looking back i dont know what i was trying to say here)
 - See each folder for *"detailed setup"*, configuration, and observations.
+- I want to look into a SIEM to aggregate all this data to easily look.
