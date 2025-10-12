@@ -7,9 +7,9 @@ The focus is on **learning, monitoring, and documenting real-world setups**.
 ---
 
 ## Current Projects
-- Plex Media Server
+- [Plex Media Server](./plex/README.md)
 - Raspberry Pi building/testing
-- [Planned] Pi-hole DNS filter
+- laptop-homelab-stack
 - [Planned]Router DMZ + network isolation
 - [Planned] T-Pot honeypot
 
