@@ -53,10 +53,11 @@ In his overclocking video, he used a command to execute and start it, but I alwa
 ---
 
 ## Final Notes
-- I recommend increasing mV by 25 to be safe, but it can’t go above 1V stock unless you flash the BIOS.  
+- I recommend increasing mV by 25 to be safe, but it can’t go above 1V stock unless you flash the BIOS. (dangerous)
 - The CPU clock speed is capped at 3GHz on older models, but some newer models have allowed 3+GHz stock (like mine). Otherwise, you'd have to change settings to allow that.  
 - `stress-ng` has an “--all” command that hits everything on the Pi at once, but in my testing it would just brick it.  
 - I just recommend making sure it’s stable in the overclock since with the cooler I have, it was impossible to get it above 50°C for more than 20 seconds.  
 - My Raspberry Pi is extremely lucky for out-of-the-box performance — ran sub-30°C idle and easily overclocked to 3.2GHz without any crashing while running `stress-ng` and `Geekbench`. Still couldn’t watch 1080p videos.
+- The cooler came with thermal pads. In installation videos (which are rare), many people only applied one pad to the PMIC chip. I installed them on the PMIC, RAM, and I/O chip, and used a PTM7950 Phase Change Thermal Pad on the cpu from my previous 5900X tuning attempt (where I was temp-limited on air cooling). This likely helped maintain such low operating temperatures during stress tests.
 
 
