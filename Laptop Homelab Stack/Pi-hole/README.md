@@ -80,7 +80,7 @@ Filter DNS requests and enable network-wide ad-blocking for my home network.
 
 - I like their Pi-hole Midnight theme but the star trek one felt like there was too much going on.
 - setup was quite straight foward and GUI is easy to learn
-
+- PLEASE when doing the laptop always on, do NOT be like me and try to break everything because its not working since you forgot to remove the # from the line of code. It will save you a lot of happiness and keep anger away.
 ---
 
 ## what I Learned
