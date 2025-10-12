@@ -9,7 +9,7 @@ The focus is on **learning, monitoring, and documenting real-world setups**.
 ## Current Projects
 - [Plex Media Server](./plex-server/README.md)
 - [Raspberry Pi building/testing](./raspberry-pi/README.md)
-- [Laptop Homelab Stack](./Laptop-Homelab-Stack/README.md)
+- [Laptop Homelab Stack](./Laptop%20Homelab%20Stack/README.md)
 - [Planned]Router DMZ + network isolation
 - [Planned] T-Pot honeypot
 
