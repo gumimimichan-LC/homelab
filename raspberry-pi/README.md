@@ -36,7 +36,7 @@ In his overclocking video, he used a command to execute and start it, but I alwa
 ## Overclocking Achievements & Strategy
 - **CPU frequency achieved:** 3.2 GHz  
 - **GPU frequency achieved:** 1.1 GHz  
-- **Avg. GPU Voltage:** 0.89V  
+- **Avg. Core Voltage:** 0.89V  
 - **Temperatures:** consistently under 50°C under full load  
 - **Observations:** out-of-the-box performance allowed extreme overclocking with full stability while running `stress-ng` and `Geekbench`. Idle temps sub 30°C.  
 
