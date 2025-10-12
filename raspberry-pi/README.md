@@ -1,7 +1,7 @@
 # Raspberry Pi 5 Lab — Overclocking & Performance Testing
 
 **Purpose**  
-Learn *"safe"* ARM overclocking, validate system stability under stress, and prepare the Pi for future honeypot experiments.
+Learn *"safe"* ARM overclocking, validate system stability under stress, and prepare the Pi for future honeypot experiments. (I was prepared to kill this pi)
 
 ---
 
@@ -41,7 +41,7 @@ Learn *"safe"* ARM overclocking, validate system stability under stress, and pre
 **Notes on approach:**  
 - Incremental overclocking: increase CPU/GPU frequencies in small steps, stress test each increment
 - Backup SD card or NVMe image before making changes (using `dd` or Raspberry Pi Imager).  
-- Monitor temps constantly with `vcgencmd measure_temp` and `htop`.  
+- Monitor temps constantly with `vcgencmd measure_temp` and `htop` or use skatterbenches telemetry monitor.  
 
 ---
 
