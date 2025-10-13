@@ -4,12 +4,13 @@
 
 ## Dashboard 
 
-<img width="1311" height="1909" alt="sdfsdfsdf" src="https://github.com/user-attachments/assets/e0774d59-ab7d-4e1d-ad14-3a3c026924b9" />
+<img width="656" height="955" alt="sdfsdfsdf" src="https://github.com/user-attachments/assets/0f279061-bf72-4f7a-99de-99099613d9a7" />
+
 
 - The dashboard just holds the overview of everything and it honestly is super straight foward and organized for easy monitoring.
 - I tested the blocklist by just pasting a URL in and it just couldn't be reached. Within 5-10 seconds it updated on the website to show it was blocked from my IP.
 
-----
+------
 
 ## Final Notes:
 
