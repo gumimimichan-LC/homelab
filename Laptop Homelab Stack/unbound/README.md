@@ -23,7 +23,7 @@
   sudo apt update
   sudo apt install unbound -y
   ```
-  
+  (get used to the sudo apt update)
 ### 2. Download Root Hints
 ```bash
 wget -O /var/lib/unbound/root.hints https://www.internic.net/domain/named.root
