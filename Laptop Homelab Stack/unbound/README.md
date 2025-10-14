@@ -62,13 +62,19 @@ server:
 ```
 
 ### 4. Enable and Start Service
+```bash
 sudo systemctl enable unbound
 sudo systemctl restart unbound
 sudo systemctl status unbound
+```
 
 ### 5. Test DNS
+```bash
 dig pi-hole.net @127.0.0.1 -p 5335
+```
+```yaml
 Expected output: ;; SERVER: 127.0.0.1#5335(127.0.0.1)
+```
 
 ---
 
@@ -79,12 +85,14 @@ Expected output: ;; SERVER: 127.0.0.1#5335(127.0.0.1)
 Open Pi-hole Admin → Settings → DNS
 
 Disable other upstream DNS servers
-
+```bash
 Add: 127.0.0.1#5335
+```
 
 Save, then restart FTL:
+```bash
 sudo systemctl restart pihole-FTL
-
+```
 ---
 
 ## Networking & Ports
@@ -100,6 +108,12 @@ Port    Protocol    Description
 - Private address blocking to avoid leaking local domains
 
 
+
+
+Overall Notes:
+- I really like yaml for lists of things to paste that go into configs
+- I feel like I'm getting better at remembering how things work such as Bolding, Italics, Bash/Yaml
+- To make sure the instructions are somewhat clear, I've been replicating everything on a Ubuntu VM 
 
 
 
