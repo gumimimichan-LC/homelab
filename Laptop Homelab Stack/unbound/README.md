@@ -101,15 +101,16 @@ sudo systemctl restart pihole-FTL
 ---
 
 ## Networking & Ports
-Port    Protocol    Description
-5335    TCP/UDP    Local DNS queries from Pi-hole
+- Port: 5335   
+- Protocol: TCP/UDP
+- Description: Local DNS queries from Pi-hole
 
 ---
 
 ## Security / Hardening
-- Runs locally only (not accessible externally)
-- DNSSEC validation enabled for authenticity
-- Hides version info and limits buffer size to prevent attacks
+- Runs locally only (not accessible from internet)
+- DNSSEC validation enabled for authenticity (auto trust anchor file is what enables DNSSec but the whole system already had it built in which cause a conflict in the config file. Hence the need to disable it.)
+- Hides version info and limits buffer size to prevent attacks, Vulnerabilities spefically in exact versions and DDoS attacks respectively.
 - Private address blocking to avoid leaking local domains
 
 ---
