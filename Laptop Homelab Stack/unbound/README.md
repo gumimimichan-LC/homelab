@@ -60,7 +60,7 @@ server:
     private-address: 172.16.0.0/12
     private-address: 127.0.0.0/8
 ```
-
+I had an issue witht the auto-trust-anchor-file, commenting it out simply fixed it.
 ### 4. Enable and Start Service
 ```bash
 sudo systemctl enable unbound
@@ -112,13 +112,16 @@ Port    Protocol    Description
 - Hides version info and limits buffer size to prevent attacks
 - Private address blocking to avoid leaking local domains
 
+---
 
+## Notes
+While Pi-hole has been working great and blocking many trackers from my browsers (firefox), Overwolf, and others, you don't really see or feel it doing its job. You only know if you check the server with statisics. 
+The moment Unbound was up and running, within minutes I noticed everything STARTED loading faster. Unbound doesn't increase the speed at which a website loads but it does for the initial data transfer. The half second it took off of the initialization was actually noticable and makes you feel like the sites loading faster but rather you are just starting the transfer quicker. I definitely recommend Unbound and have already recommended it to friends.
 
-
-Overall Notes:
-- I really like yaml for lists of things to paste that go into configs
+## Overall homelab Notes:
+- I really like yaml for lists of things to paste that go into configs, very colorful.
 - I feel like I'm getting better at remembering how things work such as Bolding, Italics, Bash/Yaml
-- To make sure the instructions are somewhat clear, I've been replicating everything on a Ubuntu VM 
+- To make sure the instructions are somewhat clear, I've been replicating everything on a Ubuntu VM on my personal windows device and it has worked perfectly for now. If any issues occur you can like message me or make a complaint or something.
 
 
 
