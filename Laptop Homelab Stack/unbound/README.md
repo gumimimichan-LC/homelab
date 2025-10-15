@@ -82,9 +82,14 @@ Expected output: ;; SERVER: 127.0.0.1#5335(127.0.0.1)
 
 ## Configure Pi-hole
 
-Open Pi-hole Admin → Settings → DNS
+1. Open Pi-hole Admin → Settings → DNS
 
-Disable other upstream DNS servers
+<img width="447" height="845" alt="image" src="https://github.com/user-attachments/assets/431d668e-ed69-4a54-a38a-d0a626e07380" />
+
+2. Disable other upstream DNS servers
+
+<img width="431" height="818" alt="image" src="https://github.com/user-attachments/assets/7de0a384-f643-4e5e-9669-b53e3e6f7566" />
+
 ```bash
 Add: 127.0.0.1#5335
 ```
