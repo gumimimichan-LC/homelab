@@ -39,7 +39,7 @@ Netdata runs a local web interface on port **19999** by default
 
 - Open your browser and go to:  
   - http://127.0.0.1:19999 - for if you're on your host device 
-  - http://<IP-of-host-device>:19999 - if just on the same network
+  - http://IP-of-host-device:19999 - if just on the same network
 
 # Networking & Ports
 
