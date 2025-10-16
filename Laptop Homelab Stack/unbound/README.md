@@ -1,4 +1,4 @@
-# Unbound - Recursive DNS Resolver
+# Unbound — Recursive DNS Resolver
 
 ## Purpose
 - Acts as a local **recursive DNS resolver** for Pi-hole.  
