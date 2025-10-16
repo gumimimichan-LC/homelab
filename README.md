@@ -37,12 +37,13 @@ The focus is on **learning, monitoring, and documenting real-world setups**.
 - **Network Topology:**
   - ISP Router (main router)  
     - Backup PC (wired)  
-    - Tenda Router (main Wi-Fi + LAN)  
+    - 2.5G Network Switch
       - Personal PC (wired) 
       - Home Server (wired)
       - Laptop (wired)
-      - Linksys Router (DMZ)  
-        - Raspberry Pi (wired - T-Pot honeypot)
+      - Tenda Router (main Wi-Fi + LAN)  
+        - Linksys Router (DMZ)  
+          - Raspberry Pi (wired - T-Pot honeypot)
 
 - **Notes:**
   - To be honest, I have no clue what I'm doing. I am just writing and saying what I've done in the confines of these 4 walls. 
