@@ -1,5 +1,8 @@
 # Netdata — Real-Time System & Network Monitoring
 
+# DISCLAIMER
+YOU CANNOT ADD SERVICES USING THIS GUIDE. FOLLOW THE OTHER IF YOU DESIRE TO ADD SERVICES.
+
 ## Purpose
 - Provides real-time performance and health monitoring for your system, services, and applications.  
 - Ideal for tracking CPU, memory, disk, network, and process activity in an interactive web dashboard.  
