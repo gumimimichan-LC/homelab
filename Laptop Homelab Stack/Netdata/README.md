@@ -37,6 +37,29 @@ Should show active (running) after the last command
 
 Netdata runs a local web interface on port **19999** by default
 
+# OPTIONAL:
+I RDP into my laptop to access the thing since it's so trash. It's also mashed behind 50 tangled cables so it's annoying to sit on the floor and mess with it. In order to be able to access the web interface on another device you must enable it to listen on each interface.
+
+1. Open the config menu
+```yaml
+sudo nano /etc/netdata/netdata.conf
+```
+2. Edit the "Bind socket to IP"
+   1. Scroll down to [global]
+   2. Change 127.0.0.1 (loopback) to 0.0.0.0
+   3. Ctrl+O, Enter, then Ctrl+X
+3. Use the command:
+   ```bash
+   sudo systemctl restart netdata
+   ```
+4. Check firewall for port 19999:
+   ```bash
+   sudo ufw allow 19999/tcp
+   ```
+5. Profit.
+   Now it should be accessible from all interfaces and be listening
+   Also TCP port 19999 was already open for me but it doesn't hurt to make sure prior
+
 - Open your browser and go to:  
   - http://127.0.0.1:19999 - for if you're on your host device 
   - http://IP-of-host-device:19999 - if just on the same network
