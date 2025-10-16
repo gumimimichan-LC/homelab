@@ -1,5 +1,5 @@
 
-# Laptop Pi-hole Lab — DNS Filtering & Ad-blocking
+# Pi-hole — DNS Filtering & Ad-blocking
 
 **Purpose**  
 Filter DNS requests and enable network-wide ad-blocking for my home network.  
