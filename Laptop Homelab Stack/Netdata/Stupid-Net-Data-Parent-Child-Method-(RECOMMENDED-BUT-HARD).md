@@ -19,14 +19,15 @@
   
   To keep it simple just gonna do a bash and copy it all
 
-   ```bash
+  ```bash
 sudo systemctl stop netdata
 sudo apt remove --purge netdata -y
 sudo rm -rf /etc/netdata /var/lib/netdata /usr/lib/netdata /usr/libexec/netdata
-   ```
-  1. Stop the Netdata service
-  2. Remove the minimal package completely
-  3. Clean up leftover files and directories
+
+  ```
+    1. Stop the Netdata service
+    2. Remove the minimal package completely
+    3. Clean up leftover files and directories
 
 2. Install the whole stupid thing
    ```bash
