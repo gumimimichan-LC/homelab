@@ -38,6 +38,6 @@ sudo rm -rf /etc/netdata /var/lib/netdata /usr/lib/netdata /usr/libexec/netdata
 
 3. Verify install because at this point, I will not be redoing this again.
    ```bash
-  ls /usr/libexec/netdata/go.d/
+    ls /usr/libexec/netdata/go.d/
     ```
   Hopefully you see an output
