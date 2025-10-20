@@ -1,6 +1,7 @@
 # Nmap + Tcpdump + Wireshark
 
-Purpose
+## Purpose
+
 Learn to scan, map, and analyze my own network traffic to understand how devices communicate, how DNS resolution works, and how packets move across my local network.
 Really I just combined these 3 since I've heard about all of them but don't actually know how they work so today is the day.
 ---
