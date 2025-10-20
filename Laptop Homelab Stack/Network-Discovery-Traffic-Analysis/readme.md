@@ -84,8 +84,10 @@ Wi-Fi Ethernet, depending on what you want to inspect.
 
 #### Ethics:
 Now you can do a lot with NMap and wireshark like:
+
 - scanning traffic on unauthorized networks, basically looking at unencrypted traffic
 - mapping network topology
+  
 While it's only two things, these things can be used for more malicious things. It's just summarized.
 
 Notes:
