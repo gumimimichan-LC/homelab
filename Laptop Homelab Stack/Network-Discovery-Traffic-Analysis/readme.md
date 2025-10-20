@@ -82,7 +82,7 @@ Wi-Fi Ethernet, depending on what you want to inspect.
 
 ---
 
-#### Ethics:
+### Ethics:
 Now you can do a lot with NMap and wireshark like:
 
 - scanning traffic on unauthorized networks, basically looking at unencrypted traffic
