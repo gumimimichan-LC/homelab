@@ -56,6 +56,37 @@ The focus is on **learning, monitoring, and documenting real-world setups**.
       - Tenda Router (main Wi-Fi + LAN)  
         - Linksys Router (DMZ)  
           - Raspberry Pi (wired - T-Pot honeypot)
+            
+---
+
+## **Hardware For each node** 
+Wanted To List Everything in my homelab as idk maybe you can know what the limits are based on my hardware.
+
+### DISCLAIMER
+Do note that I say MT/s and not Mhz. Ram companies have been basically scamming people by confusing Megatransfers per second compared to Megahertz due to how ram works. Ram is **DDR** which stands for **Double Data Rate** meaning that it transfers data **TWICE** per clock cycle. So my *"3200Mhz"* ram is actually 1600Mhz but due to it being DDR, the ram is actually 3200MT/s. This was a big misconception until DDR5 came out and they started putting 6000Mhz which is insane. So please don't be dumb like a lot of people and confuse the two. It is **NOT** the same.
+
+- Backup PC: Some dell optiplex, Ill check later
+
+- Personal PC:
+  - CPU: R9 5900x
+  - GPU: RTX 4070 OC
+  - RAM: 32GB 3200MT/s
+
+- Home Server
+  - CPU: R5 3600x
+  - GPU: RTX 2060 Super
+  - RAM: 16 GB 3200MT/s
+
+- Laptop - HP Stream 2014
+  - CPU: Intel Celeron N3060
+  - GPU: Integrated Intel HD Graphics 400
+  - RAM: 4 GB DDR3L 1600MT/s
+
+- Raspberry Pi 5 16GB
+  - Its a raspberry pi 5 :|
+  - HAB nVME 1TB
+
+
 
 - **Notes:**
   - To be honest, I have no clue what I'm doing. I am just writing and saying what I've done in the confines of these 4 walls. 
