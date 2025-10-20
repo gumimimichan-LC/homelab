@@ -36,7 +36,7 @@ su - $USER
 ```
 ---
 ## Tools & Configuration
-These were just examples I found, if you need the actual command structures just look it up tbh                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+These were just examples I found, if you need the actual command structures just look it up tbh
 
 ### Nmap — Network Discovery
 Now we do some Nmap-ing!
@@ -92,7 +92,9 @@ Now you can do a lot with NMap and wireshark like:
   
 While it's only two things, these things can be used for more malicious things. It's just summarized.
 
-Notes:
+---
+
+### Notes:
 
 
 
