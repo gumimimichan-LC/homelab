@@ -42,11 +42,21 @@ These were just examples I found, if you need the actual command structures just
 Now we do some Nmap-ing!
 - Scan devices and detect open ports:
 ```bash
-sudo nmap -sn 192.168.254.0/24
+sudo nmap -sS -T4 -Pn --reason -sV 192.168.x.x
+```
+-sS = TCP SYN (stealthy).
+-T4 = faster timing.
+-Pn = don’t ping (useful if hosts don’t respond to ICMP).
+-sV = probe services/versions.
+--reason = show why a port is reported open/closed.
+
+- Ping all devices
+```bash
+sudo nmap -sn 192.168.x.x/24
 ```
 -Check what services are running:
 ```bash 
-sudo nmap -sS -sV -O 192.168.254.107
+sudo nmap -sS -sV -O 192.168.x.x
 ```
 
 ### Tcpdump — Raw Packet Capture
@@ -95,7 +105,7 @@ While it's only two things, these things can be used for more malicious things. 
 ---
 
 ### Notes:
-
+- I found many ports that were open! mainly http/s, rdp, 3001, 19999. They were responsible for the other services on this device, I ran a script in the terminal and it closed all ports for everyone except my main IP. It doesn't affect web browsing as its only for inbound connections and not outbound. Furthermore, I found out TCP/IP 
 
 
 
