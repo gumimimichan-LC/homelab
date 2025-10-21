@@ -90,7 +90,7 @@ HTTP → 80
 HTTPS → 443
 
 #### Capture Interfaces:
-Wi-Fi Ethernet, depending on what you want to inspect.
+Wi-Fi/Ethernet, depending on what you want to inspect.
 
 ---
 
@@ -105,7 +105,7 @@ While it's only two things, these things can be used for more malicious things. 
 ---
 
 ### Notes:
-- I found many ports that were open! mainly http/s, rdp, 3001, 19999. They were responsible for the other services on this device, I ran a script in the terminal and it closed all ports for everyone except my main IP. It doesn't affect web browsing as its only for inbound connections and not outbound. Furthermore, I found out TCP/IP 
+- I found many ports that were open! mainly http/s, rdp, 3001, 19999. They were responsible for the other services on this device, I ran a script in the terminal and it closed all ports for everyone except my main IP. It doesn't affect web browsing as its only for inbound connections and not outbound. Furthermore, I found out TCP/IP uses ephemeral ports to uniquely identify connections without taking up the common ports.
 
 
 
