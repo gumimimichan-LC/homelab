@@ -16,7 +16,7 @@ These are the services I plan to run:
 - [Unbound](./unbound/README.md) — Recursive DNS resolver to improve privacy and DNS speed.  
 - [Uptime Kuma](./Kuma/README.md) — Monitoring tool that pings services to ensure uptime.
 - [Netdata](./Netdata/README.md) — Real-time system and network monitoring.
-- [Networking Stuff](./Network-Discovery-Traffic-Analysis/README.md)
+- [Networking Stuff](./Network-Discovery-Traffic-Analysis/readme.md)
 
 ---
 
