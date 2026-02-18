@@ -1,2 +1,3 @@
-New-ADOrganizationalUnit -Name "Users-US" -Path "DC=hackrange,DC=com"
-New-ADOrganizationalUnit -Name "FLORIDA"  -Path "OU=Users-US,DC=hackrange,DC=com"
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+cd "C:\Users\Administrator\Desktop\AD-Scripts"
+.\Create-ADUsers.ps1
