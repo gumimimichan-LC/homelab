@@ -1,0 +1,356 @@
+<# 
+    Create-ADUsers.ps1
+    Requirements:
+    - PowerShell 5.1
+    - ActiveDirectory module available (RSAT / AD DS tools)
+    - Works on Windows Server 2022
+    - Compatible with AD 2016 functional level
+#>
+
+# -----------------------------
+# Settings
+# -----------------------------
+$DomainSuffix   = "hackrange.com"
+$TargetOU       = "OU=FLORIDA,OU=Users-US,DC=hackrange,DC=com"
+
+$NamesFile      = ".\names.txt"
+$WordListFile   = ".\dictionary.txt"
+$ResultsFile    = ".\results.csv"
+
+$NamesUrl       = "https://hackrange.org/scripts/names.txt"
+$WordListUrl    = "https://hackrange.net/scripts/dictionary.txt"
+
+# Password format: word-word-word-digit
+$WordsPerPassword = 3
+$MinWordLength    = 4
+
+# -----------------------------
+# Helper Functions
+# -----------------------------
+
+function Write-Info {
+    param([string]$Message)
+    Write-Host "[INFO]  $Message" -ForegroundColor Cyan
+}
+
+function Write-Good {
+    param([string]$Message)
+    Write-Host "[OK]    $Message" -ForegroundColor Green
+}
+
+function Write-Warn {
+    param([string]$Message)
+    Write-Host "[WARN]  $Message" -ForegroundColor Yellow
+}
+
+function Write-Bad {
+    param([string]$Message)
+    Write-Host "[ERROR] $Message" -ForegroundColor Red
+}
+
+function Ensure-FileDownloaded {
+    param(
+        [Parameter(Mandatory=$true)][string]$Path,
+        [Parameter(Mandatory=$true)][string]$Url
+    )
+
+    if (-not (Test-Path -Path $Path)) {
+        Write-Info "File not found: $Path"
+        Write-Info "Downloading from: $Url"
+
+        try {
+            Invoke-WebRequest -Uri $Url -OutFile $Path -UseBasicParsing -ErrorAction Stop
+            Write-Good "Downloaded: $Path"
+        }
+        catch {
+            Write-Bad "Failed to download $Url"
+            Write-Bad $_.Exception.Message
+            throw
+        }
+    }
+    else {
+        Write-Info "Found local file: $Path"
+    }
+}
+
+function To-TitleCaseSimple {
+    param([string]$Text)
+
+    if ([string]::IsNullOrWhiteSpace($Text)) { return $Text }
+
+    $t = $Text.Trim().ToLower()
+    return ($t.Substring(0,1).ToUpper() + $t.Substring(1))
+}
+
+function New-RandomSamAccountName {
+    # samAccountName max length is 20
+    # We'll generate: 8 letters + 4 digits (12 chars)
+    $letters = "abcdefghijklmnopqrstuvwxyz"
+    $digits  = "0123456789"
+
+    $sam = ""
+    1..8  | ForEach-Object { $sam += $letters[(Get-Random -Minimum 0 -Maximum $letters.Length)] }
+    1..4  | ForEach-Object { $sam += $digits[(Get-Random -Minimum 0 -Maximum $digits.Length)] }
+
+    return $sam
+}
+
+function New-RandomPassphrase {
+    param(
+        [string[]]$Words,
+        [int]$WordCount = 3,
+        [int]$MinLen = 4
+    )
+
+    $validWords = $Words | Where-Object { $_ -and $_.Trim().Length -ge $MinLen }
+
+    if ($validWords.Count -lt $WordCount) {
+        throw "Word list does not contain enough usable words."
+    }
+
+    $chosen = @()
+    1..$WordCount | ForEach-Object {
+        $chosen += ($validWords | Get-Random).Trim().ToLower()
+    }
+
+    $digit = Get-Random -Minimum 0 -Maximum 10
+
+    return (($chosen -join "-") + $digit)
+}
+
+function Test-UPNExists {
+    param([string]$UPN)
+
+    try {
+        $existing = Get-ADUser -Filter "UserPrincipalName -eq '$UPN'" -Properties UserPrincipalName -ErrorAction Stop
+        return ($null -ne $existing)
+    }
+    catch {
+        # If query fails for some reason, be safe and assume it exists
+        Write-Warn "UPN lookup failed for: $UPN"
+        Write-Warn $_.Exception.Message
+        return $true
+    }
+}
+
+function Get-UniqueUPN {
+    param(
+        [string]$BaseUPN,
+        [string]$SamAccountName
+    )
+
+    if (-not (Test-UPNExists -UPN $BaseUPN)) {
+        return $BaseUPN
+    }
+
+    # If conflict, append samAccountName before the @
+    $parts = $BaseUPN.Split("@")
+    $newUPN = "$($parts[0]).$SamAccountName@$($parts[1])"
+
+    if (-not (Test-UPNExists -UPN $newUPN)) {
+        return $newUPN
+    }
+
+    # Extremely unlikely: keep appending random digits until unique
+    for ($i = 0; $i -lt 20; $i++) {
+        $rand = Get-Random -Minimum 100 -Maximum 999
+        $tryUPN = "$($parts[0]).$SamAccountName$rand@$($parts[1])"
+        if (-not (Test-UPNExists -UPN $tryUPN)) {
+            return $tryUPN
+        }
+    }
+
+    throw "Unable to generate a unique UPN for $BaseUPN after multiple attempts."
+}
+
+# -----------------------------
+# Start
+# -----------------------------
+
+Write-Info "Starting Active Directory user creation script..."
+
+# Import AD module
+try {
+    Import-Module ActiveDirectory -ErrorAction Stop
+    Write-Good "ActiveDirectory module imported successfully."
+}
+catch {
+    Write-Bad "Failed to import ActiveDirectory module."
+    Write-Bad "Make sure RSAT / AD DS tools are installed."
+    Write-Bad $_.Exception.Message
+    exit 1
+}
+
+# Ensure required files exist (download if missing)
+try {
+    Ensure-FileDownloaded -Path $WordListFile -Url $WordListUrl
+    Ensure-FileDownloaded -Path $NamesFile    -Url $NamesUrl
+}
+catch {
+    Write-Bad "Required files could not be prepared. Exiting."
+    exit 1
+}
+
+# Load word list
+try {
+    $WordList = Get-Content -Path $WordListFile -ErrorAction Stop
+    Write-Good "Loaded word list: $($WordList.Count) words"
+}
+catch {
+    Write-Bad "Failed to read word list file: $WordListFile"
+    Write-Bad $_.Exception.Message
+    exit 1
+}
+
+# Load names
+try {
+    $NameLines = Get-Content -Path $NamesFile -ErrorAction Stop | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
+    Write-Good "Loaded names file: $($NameLines.Count) entries"
+}
+catch {
+    Write-Bad "Failed to read names file: $NamesFile"
+    Write-Bad $_.Exception.Message
+    exit 1
+}
+
+# Verify OU exists
+try {
+    $ouCheck = Get-ADOrganizationalUnit -Identity $TargetOU -ErrorAction Stop
+    Write-Good "Target OU found: $TargetOU"
+}
+catch {
+    Write-Bad "Target OU not found or not accessible: $TargetOU"
+    Write-Bad $_.Exception.Message
+    exit 1
+}
+
+# Prepare results
+$Results = New-Object System.Collections.Generic.List[object]
+
+# -----------------------------
+# Process each name
+# -----------------------------
+foreach ($line in $NameLines) {
+
+    $original = $line.Trim()
+
+    # Validate name format (at least 2 parts)
+    $parts = $original -split "\s+"
+
+    if ($parts.Count -lt 2) {
+        Write-Warn "Skipping invalid name (needs at least first + last): '$original'"
+        continue
+    }
+
+    $firstRaw = $parts[0]
+    $lastRaw  = $parts[-1]   # last token as last name (handles middle names)
+
+    $FirstName = To-TitleCaseSimple -Text $firstRaw
+    $LastName  = To-TitleCaseSimple -Text $lastRaw
+
+    $DisplayName = "$FirstName $LastName"
+
+    Write-Info "Processing: $DisplayName"
+
+    # Generate samAccountName (ensure uniqueness)
+    $SamAccountName = $null
+    for ($i = 0; $i -lt 25; $i++) {
+        $trySam = New-RandomSamAccountName
+
+        try {
+            $samExists = Get-ADUser -Filter "SamAccountName -eq '$trySam'" -ErrorAction Stop
+            if ($null -eq $samExists) {
+                $SamAccountName = $trySam
+                break
+            }
+        }
+        catch {
+            # If lookup fails, assume it's safe and use it
+            $SamAccountName = $trySam
+            break
+        }
+    }
+
+    if (-not $SamAccountName) {
+        Write-Bad "Could not generate a unique samAccountName for: $DisplayName"
+        continue
+    }
+
+    # Base UPN
+    $upnBase = ("{0}.{1}@{2}" -f $FirstName.ToLower(), $LastName.ToLower(), $DomainSuffix)
+
+    # Make UPN unique if needed
+    try {
+        $UPN = Get-UniqueUPN -BaseUPN $upnBase -SamAccountName $SamAccountName
+    }
+    catch {
+        Write-Bad "Failed generating unique UPN for $DisplayName"
+        Write-Bad $_.Exception.Message
+        continue
+    }
+
+    # Generate password
+    try {
+        $PlainPassword = New-RandomPassphrase -Words $WordList -WordCount $WordsPerPassword -MinLen $MinWordLength
+    }
+    catch {
+        Write-Bad "Password generation failed for $DisplayName"
+        Write-Bad $_.Exception.Message
+        continue
+    }
+
+    $SecurePassword = ConvertTo-SecureString $PlainPassword -AsPlainText -Force
+
+    # Create AD user
+    try {
+        New-ADUser `
+            -Name $DisplayName `
+            -GivenName $FirstName `
+            -Surname $LastName `
+            -DisplayName $DisplayName `
+            -SamAccountName $SamAccountName `
+            -UserPrincipalName $UPN `
+            -Path $TargetOU `
+            -AccountPassword $SecurePassword `
+            -Enabled $true `
+            -ChangePasswordAtLogon $false `
+            -PasswordNeverExpires $false `
+            -ErrorAction Stop
+
+        Write-Good "Created user: $SamAccountName  ($UPN)"
+
+        # Add to results
+        $Results.Add([PSCustomObject]@{
+            samAccountName = $SamAccountName
+            UPN            = $UPN
+            FirstName      = $FirstName
+            LastName       = $LastName
+            Password       = $PlainPassword
+        }) | Out-Null
+    }
+    catch {
+        Write-Bad "Failed to create user: $DisplayName"
+        Write-Bad $_.Exception.Message
+        continue
+    }
+}
+
+# -----------------------------
+# Export results
+# -----------------------------
+try {
+    if ($Results.Count -gt 0) {
+        $Results | Export-Csv -Path $ResultsFile -NoTypeInformation -Encoding UTF8
+        Write-Good "Exported results to: $ResultsFile"
+        Write-Good "Users created: $($Results.Count)"
+    }
+    else {
+        Write-Warn "No users were created. Nothing to export."
+    }
+}
+catch {
+    Write-Bad "Failed to export results CSV."
+    Write-Bad $_.Exception.Message
+}
+
+Write-Info "Script complete."
