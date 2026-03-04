@@ -1,1 +1,2 @@
-Select-String -Path "D:\shares\iphone\*" -Pattern "pass","ssh","user","login","credential" -Recurse -ErrorAction SilentlyContinue
+Get-ChildItem "D:\shares\iphone\" -Recurse -File -ErrorAction SilentlyContinue | 
+Select-String -Pattern "pass","ssh","user","login","credential"
