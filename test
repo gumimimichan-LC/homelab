@@ -1,1 +1,1 @@
-Get-ChildItem -Path C:\Users\sulocal -Recurse -Include *.txt,*.xlsx,*.docx,*.rdp -ErrorAction SilentlyContinue
+Get-ChildItem -Path C:\Users -Recurse -Force -ErrorAction SilentlyContinue | Where-Object {$_.Length -lt 500000}
