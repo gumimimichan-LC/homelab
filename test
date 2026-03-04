@@ -1,1 +1,1 @@
-Get-ChildItem -Path C:\Users -Recurse -Force -ErrorAction SilentlyContinue | Where-Object {$_.Length -lt 500000}
+Select-String -Path "D:\shares\iphone\*" -Pattern "pass","ssh","user","login","credential" -Recurse -ErrorAction SilentlyContinue
