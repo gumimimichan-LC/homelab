@@ -1,2 +1,1 @@
-Get-ChildItem "D:\Share\iphone\filesystem1" -Recurse -File -ErrorAction SilentlyContinue |
-Select-String -Pattern "pass","ssh","user","login","credential"
+Get-ChildItem -Path "C:\" -Recurse -Force -ErrorAction SilentlyContinue | Where-Object {$_.Name -like "*pass*" -or $_.Name -like "*cred*" -or $_.Name -like "*login*" -or $_.Name -like "*secret*"}
