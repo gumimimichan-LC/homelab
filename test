@@ -1,1 +1,4 @@
-gobuster dir -u http://172.17.17.46:8080 -w /usr/share/wordlists/dirb/common.txt
+curl http://172.17.17.46:8080/continuum/
+curl http://172.17.17.46:8080/continuum/servlet/continuum
+curl http://172.17.17.46:8080/continuum/login.jsp
+curl http://172.17.17.46:8080/continuum/index.jsp
