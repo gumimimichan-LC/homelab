@@ -1,1 +1,3 @@
-gobuster dir -u http://172.17.17.104:8080 -w /usr/share/wordlists/dirb/common.txt
+curl http://172.17.17.104:8080/passwords/heroes.xml
+curl http://172.17.17.104:8080/passwords/web.config.bak
+curl http://172.17.17.104:8080/passwords/wp-config.bak
