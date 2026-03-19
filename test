@@ -1,4 +1,4 @@
-curl http://172.17.17.46:8080/continuum/
-curl http://172.17.17.46:8080/continuum/servlet/continuum
-curl http://172.17.17.46:8080/continuum/login.jsp
-curl http://172.17.17.46:8080/continuum/index.jsp
+curl -u tomcat:s3cret http://172.17.17.118:8080/manager/html
+curl -u tomcat:tomcat http://172.17.17.118:8080/manager/html
+curl -u admin:admin http://172.17.17.118:8080/manager/html
+curl -u admin:s3cret http://172.17.17.118:8080/manager/html
