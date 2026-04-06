@@ -1,29 +1,24 @@
-https://import.cdn.thinkific.com/843984/courses/2439750/splunk_universal_forwarder-230918-173813.zip
 
-Invoke-WebRequest -Uri "https://import.cdn.thinkific.com/843984/courses/2439750/splunk_universal_forwarder-230918-173813.zip" -OutFile "C:\Users\Public\splunk_forwarder.zip"
-Expand-Archive "C:\Users\Public\splunk_forwarder.zip" -DestinationPath "C:\Users\Public\splunk"
 
-python3 -m http.server 8001
-http://<kali-ip>:8001
+https://import.cdn.thinkific.com/843984/courses/2439750/Sysmon-230918-122343.zip
 
+
+cd C:\Users\Administrator\Downloads\Sysmon
 
 
 
-
+sysmon64.exe -accepteula -i sysmonconfig-export.xml
 
 
 
 
+net stop SplunkForwarder
+net start SplunkForwarder
 
 
+http://172.16.1.200:8000
 
-
-
-
-
-
-
-
+.\sysmon64.exe -accepteula -i sysmonconfig-export.xml
 
 
 
