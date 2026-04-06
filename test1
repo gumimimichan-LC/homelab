@@ -1,53 +1,29 @@
-sudo mkdir -p /etc/ssl/localcerts
+https://import.cdn.thinkific.com/843984/courses/2439750/splunk_universal_forwarder-230918-173813.zip
 
-sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
--keyout /etc/ssl/localcerts/nginx.key \
--out /etc/ssl/localcerts/nginx.crt
+Invoke-WebRequest -Uri "https://import.cdn.thinkific.com/843984/courses/2439750/splunk_universal_forwarder-230918-173813.zip" -OutFile "C:\Users\Public\splunk_forwarder.zip"
+Expand-Archive "C:\Users\Public\splunk_forwarder.zip" -DestinationPath "C:\Users\Public\splunk"
 
-
-
-sudo nano /etc/nginx/sites-available/reverse-proxy
-
-server {
-    listen 80;
-    server_name _;
-
-    return 301 https://$host$request_uri;
-}
-
-server {
-    listen 443 ssl;
-    server_name _;
-
-    ssl_certificate /etc/ssl/localcerts/nginx.crt;
-    ssl_certificate_key /etc/ssl/localcerts/nginx.key;
-
-    ssl_protocols TLSv1.2 TLSv1.3;
-
-    location / {
-        proxy_pass http://127.0.0.1:8080;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-}
+python3 -m http.server 8001
+http://<kali-ip>:8001
 
 
 
-sudo ln -s /etc/nginx/sites-available/reverse-proxy /etc/nginx/sites-enabled/
-
-sudo rm /etc/nginx/sites-enabled/default
-
-sudo nginx -t
-
-sudo systemctl restart nginx
-
-sudo ufw allow 80
-sudo ufw allow 443
 
 
-https://172.16.1.2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
