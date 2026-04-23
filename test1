@@ -12,3 +12,12 @@ FROM quantity_samples qs
 JOIN samples s ON qs.data_id = s.data_id
 WHERE datetime(s.start_date + 978307200, 'unixepoch') 
 BETWEEN '2023-06-24 04:00:00' AND '2023-06-25 03:59:59';
+
+SELECT 
+SUM(qs.quantity)
+FROM quantity_samples qs
+JOIN samples s ON qs.data_id = s.data_id
+JOIN data_types dt ON s.data_type = dt.data_type
+WHERE dt.identifier LIKE '%step%'
+AND datetime(s.start_date + 978307200, 'unixepoch') 
+BETWEEN '2023-06-24 04:00:00' AND '2023-06-25 03:59:59';
