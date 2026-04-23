@@ -1,23 +1,9 @@
-SELECT 
-qs.quantity,
-datetime(s.start_date + 978307200, 'unixepoch') as start_date
-FROM quantity_samples qs
-JOIN samples s ON qs.data_id = s.data_id
-WHERE datetime(s.start_date + 978307200, 'unixepoch') 
-BETWEEN '2023-06-24 04:00:00' AND '2023-06-25 03:59:59';
-
-SELECT 
-SUM(qs.quantity)
-FROM quantity_samples qs
-JOIN samples s ON qs.data_id = s.data_id
-WHERE datetime(s.start_date + 978307200, 'unixepoch') 
-BETWEEN '2023-06-24 04:00:00' AND '2023-06-25 03:59:59';
-
-SELECT 
-SUM(qs.quantity)
-FROM quantity_samples qs
-JOIN samples s ON qs.data_id = s.data_id
-JOIN data_types dt ON s.data_type = dt.data_type
-WHERE dt.identifier LIKE '%step%'
-AND datetime(s.start_date + 978307200, 'unixepoch') 
-BETWEEN '2023-06-24 04:00:00' AND '2023-06-25 03:59:59';
+SELECT ZASSET.ZFILENAME
+FROM ZASSET
+JOIN ZDETECTEDFACE ON ZASSET.Z_PK = ZDETECTEDFACE.ZASSET
+WHERE ZDETECTEDFACE.ZPERSON IN (
+'1DBFB0B3-F914-4494-8B17-6BD364880887',
+'72E4D643-CE38-4A8D-94CC-1A1945E0CE29'
+)
+GROUP BY ZASSET.ZFILENAME
+HAVING COUNT(DISTINCT ZDETECTEDFACE.ZPERSON) = 2;
